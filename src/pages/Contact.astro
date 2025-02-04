@@ -35,35 +35,4 @@ import Footer from "../components/Footer.astro";
         grid-template-columns: repeat(auto-fit, minmax(32ch, 1fr));
         gap: 2rem;
     }
-    li {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 1px;
-        color: color: #23262d;
-        background-color: #23262d;
-        background-image: none;
-        background-size: 400%;
-        border-radius: 7px;
-        background-position: 50%;
-        transition: background-position 2s cubic-bezier(0.22, 1, 0.36, 1);
-        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-    }
-    li > a {
-        width: 100%;
-        text-decoration: none;
-        line-height: 1.4;
-        padding: calc(1.5rem - 1px);
-        border-radius: 8px;
-        color: #23262d;
-        opacity: 0.8;
-    }
-    li:is(:hover, :focus-within) {
-        background-position: 0;
-        background-image: var(--accent-gradient);
-    }
-    li:is(:hover, :focus-within) h2 {
-        color: #23262d;
-    }
 </style>
