@@ -1,0 +1,143 @@
+---
+interface TimelineItem {
+    date: string;
+    title: string;
+    description: string;
+}
+
+interface Props {
+    items: TimelineItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="timeline">
+    {
+        items.map((item, index) => (
+            <div class="timeline-item">
+                <div class="timeline-item-content">
+                    <time>{item.date}</time>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                    <span class="circle" />
+                </div>
+            </div>
+        ))
+    }
+</div>
+<script type="module">
+    import { initTimeline } from "/src/scripts/TimeLine.js";
+    initTimeline();
+</script>
+<style>
+    .timeline {
+        position: relative;
+        padding-top: 1.5rem 0;
+        padding: 6rem 0;
+    }
+
+    .timeline::after {
+        content: "";
+        position: absolute;
+        width: 0.2rem;
+        background: #84754e;
+        padding-top: 6rem;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -1px;
+    }
+
+    .timeline-item {
+        padding: 1.5rem 3rem;
+        position: relative;
+        background-color: inherit;
+        width: 50%;
+        opacity: 1;
+    }
+
+    .timeline-item:nth-child(odd) {
+        left: 0;
+    }
+
+    .timeline-item:nth-child(even) {
+        left: 50%;
+    }
+
+    .timeline-item-content {
+        padding: 2rem 3rem;
+        background: #fff;
+        position: relative;
+        border-radius: 6px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        /* Efecto espejo solo para imagen de fondo*/
+        /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3); */
+    }
+
+    .timeline-item-content time {
+        font-weight: bold;
+        color: #84754e;
+    }
+
+    .circle {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        right: -8px;
+        background-color: #84754e;
+        border: 2px solid #84754e;
+        top: 15px;
+        border-radius: 50%;
+        z-index: 1;
+    }
+
+    .timeline-item:nth-child(even) .circle {
+        left: -8px;
+    }
+
+    /* Animacion de timeline */
+
+    .timeline-item {
+        opacity: 0;
+        transform: translateY(50px);
+        transition:
+            opacity 0.6s ease-out,
+            transform 0.6s ease-out;
+    }
+
+    ._show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    ._hide {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    @keyframes _show {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    @keyframes _hide {
+        0% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+    }
+</style>
