@@ -27,9 +27,15 @@ const { items } = Astro.props;
     }
 </div>
 <script type="module">
-    import { initTimeline } from "/src/scripts/TimeLine.js";
+    import { initTimeline, reInitTimeline } from "/src/scripts/TimeLine.js";
+
     initTimeline();
+
+    document.addEventListener("astro:after-swap", () => {
+        reInitTimeline();
+    });
 </script>
+
 <style>
     .timeline {
         position: relative;
